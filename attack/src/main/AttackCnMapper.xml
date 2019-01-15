@@ -1,0 +1,391 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.demo.mapper.AttackCnMapper" >
+  <resultMap id="BaseResultMap" type="com.example.demo.model.AttackCn" >
+    <result column="ID" property="id" jdbcType="INTEGER" />
+    <result column="Name" property="name" jdbcType="VARCHAR" />
+    <result column="Abstraction" property="abstraction" jdbcType="VARCHAR" />
+    <result column="Status" property="status" jdbcType="VARCHAR" />
+    <result column="Alternate Terms" property="alternateTerms" jdbcType="VARCHAR" />
+    <result column="Likelihood Of Attack" property="likelihoodOfAttack" jdbcType="VARCHAR" />
+    <result column="Typical Severity" property="typicalSeverity" jdbcType="VARCHAR" />
+    <result column="Related Attack Patterns" property="relatedAttackPatterns" jdbcType="VARCHAR" />
+    <result column="Related Weaknesses" property="relatedWeaknesses" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.example.demo.model.AttackCnWithBLOBs" extends="BaseResultMap" >
+    <result column="Description" property="description" jdbcType="LONGVARCHAR" />
+    <result column="Execution Flow" property="executionFlow" jdbcType="LONGVARCHAR" />
+    <result column="Prerequisites" property="prerequisites" jdbcType="LONGVARCHAR" />
+    <result column="Skills Required" property="skillsRequired" jdbcType="LONGVARCHAR" />
+    <result column="Resources Required" property="resourcesRequired" jdbcType="LONGVARCHAR" />
+    <result column="Indicators" property="indicators" jdbcType="LONGVARCHAR" />
+    <result column="Consequences" property="consequences" jdbcType="LONGVARCHAR" />
+    <result column="Mitigations" property="mitigations" jdbcType="LONGVARCHAR" />
+    <result column="Example Instances" property="exampleInstances" jdbcType="LONGVARCHAR" />
+    <result column="Taxonomy Mappings" property="taxonomyMappings" jdbcType="LONGVARCHAR" />
+    <result column="Notes" property="notes" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ID, Name, Abstraction, Status, "Alternate Terms", "Likelihood Of Attack", "Typical Severity", 
+    "Related Attack Patterns", "Related Weaknesses"
+  </sql>
+  <sql id="Blob_Column_List" >
+    Description, "Execution Flow", Prerequisites, "Skills Required", "Resources Required", 
+    Indicators, Consequences, Mitigations, "Example Instances", "Taxonomy Mappings", 
+    Notes
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.example.demo.model.AttackCnExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from attack_cn
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.example.demo.model.AttackCnExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from attack_cn
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.example.demo.model.AttackCnExample" >
+    delete from attack_cn
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.example.demo.model.AttackCnWithBLOBs" >
+    insert into attack_cn (ID, Name, Abstraction, 
+      Status, "Alternate Terms", "Likelihood Of Attack", 
+      "Typical Severity", "Related Attack Patterns", 
+      "Related Weaknesses", Description, "Execution Flow", 
+      Prerequisites, "Skills Required", 
+      "Resources Required", Indicators, 
+      Consequences, Mitigations, "Example Instances", 
+      "Taxonomy Mappings", Notes)
+    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{abstraction,jdbcType=VARCHAR}, 
+      #{status,jdbcType=VARCHAR}, #{alternateTerms,jdbcType=VARCHAR}, #{likelihoodOfAttack,jdbcType=VARCHAR}, 
+      #{typicalSeverity,jdbcType=VARCHAR}, #{relatedAttackPatterns,jdbcType=VARCHAR}, 
+      #{relatedWeaknesses,jdbcType=VARCHAR}, #{description,jdbcType=LONGVARCHAR}, #{executionFlow,jdbcType=LONGVARCHAR}, 
+      #{prerequisites,jdbcType=LONGVARCHAR}, #{skillsRequired,jdbcType=LONGVARCHAR}, 
+      #{resourcesRequired,jdbcType=LONGVARCHAR}, #{indicators,jdbcType=LONGVARCHAR}, 
+      #{consequences,jdbcType=LONGVARCHAR}, #{mitigations,jdbcType=LONGVARCHAR}, #{exampleInstances,jdbcType=LONGVARCHAR}, 
+      #{taxonomyMappings,jdbcType=LONGVARCHAR}, #{notes,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.example.demo.model.AttackCnWithBLOBs" >
+    insert into attack_cn
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="name != null" >
+        Name,
+      </if>
+      <if test="abstraction != null" >
+        Abstraction,
+      </if>
+      <if test="status != null" >
+        Status,
+      </if>
+      <if test="alternateTerms != null" >
+        "Alternate Terms",
+      </if>
+      <if test="likelihoodOfAttack != null" >
+        "Likelihood Of Attack",
+      </if>
+      <if test="typicalSeverity != null" >
+        "Typical Severity",
+      </if>
+      <if test="relatedAttackPatterns != null" >
+        "Related Attack Patterns",
+      </if>
+      <if test="relatedWeaknesses != null" >
+        "Related Weaknesses",
+      </if>
+      <if test="description != null" >
+        Description,
+      </if>
+      <if test="executionFlow != null" >
+        "Execution Flow",
+      </if>
+      <if test="prerequisites != null" >
+        Prerequisites,
+      </if>
+      <if test="skillsRequired != null" >
+        "Skills Required",
+      </if>
+      <if test="resourcesRequired != null" >
+        "Resources Required",
+      </if>
+      <if test="indicators != null" >
+        Indicators,
+      </if>
+      <if test="consequences != null" >
+        Consequences,
+      </if>
+      <if test="mitigations != null" >
+        Mitigations,
+      </if>
+      <if test="exampleInstances != null" >
+        "Example Instances",
+      </if>
+      <if test="taxonomyMappings != null" >
+        "Taxonomy Mappings",
+      </if>
+      <if test="notes != null" >
+        Notes,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="abstraction != null" >
+        #{abstraction,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="alternateTerms != null" >
+        #{alternateTerms,jdbcType=VARCHAR},
+      </if>
+      <if test="likelihoodOfAttack != null" >
+        #{likelihoodOfAttack,jdbcType=VARCHAR},
+      </if>
+      <if test="typicalSeverity != null" >
+        #{typicalSeverity,jdbcType=VARCHAR},
+      </if>
+      <if test="relatedAttackPatterns != null" >
+        #{relatedAttackPatterns,jdbcType=VARCHAR},
+      </if>
+      <if test="relatedWeaknesses != null" >
+        #{relatedWeaknesses,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        #{description,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="executionFlow != null" >
+        #{executionFlow,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="prerequisites != null" >
+        #{prerequisites,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="skillsRequired != null" >
+        #{skillsRequired,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="resourcesRequired != null" >
+        #{resourcesRequired,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="indicators != null" >
+        #{indicators,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="consequences != null" >
+        #{consequences,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="mitigations != null" >
+        #{mitigations,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="exampleInstances != null" >
+        #{exampleInstances,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="taxonomyMappings != null" >
+        #{taxonomyMappings,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="notes != null" >
+        #{notes,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.example.demo.model.AttackCnExample" resultType="java.lang.Integer" >
+    select count(*) from attack_cn
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update attack_cn
+    <set >
+      <if test="record.id != null" >
+        ID = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.name != null" >
+        Name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.abstraction != null" >
+        Abstraction = #{record.abstraction,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null" >
+        Status = #{record.status,jdbcType=VARCHAR},
+      </if>
+      <if test="record.alternateTerms != null" >
+        "Alternate Terms" = #{record.alternateTerms,jdbcType=VARCHAR},
+      </if>
+      <if test="record.likelihoodOfAttack != null" >
+        "Likelihood Of Attack" = #{record.likelihoodOfAttack,jdbcType=VARCHAR},
+      </if>
+      <if test="record.typicalSeverity != null" >
+        "Typical Severity" = #{record.typicalSeverity,jdbcType=VARCHAR},
+      </if>
+      <if test="record.relatedAttackPatterns != null" >
+        "Related Attack Patterns" = #{record.relatedAttackPatterns,jdbcType=VARCHAR},
+      </if>
+      <if test="record.relatedWeaknesses != null" >
+        "Related Weaknesses" = #{record.relatedWeaknesses,jdbcType=VARCHAR},
+      </if>
+      <if test="record.description != null" >
+        Description = #{record.description,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.executionFlow != null" >
+        "Execution Flow" = #{record.executionFlow,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.prerequisites != null" >
+        Prerequisites = #{record.prerequisites,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.skillsRequired != null" >
+        "Skills Required" = #{record.skillsRequired,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.resourcesRequired != null" >
+        "Resources Required" = #{record.resourcesRequired,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.indicators != null" >
+        Indicators = #{record.indicators,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.consequences != null" >
+        Consequences = #{record.consequences,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.mitigations != null" >
+        Mitigations = #{record.mitigations,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.exampleInstances != null" >
+        "Example Instances" = #{record.exampleInstances,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.taxonomyMappings != null" >
+        "Taxonomy Mappings" = #{record.taxonomyMappings,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.notes != null" >
+        Notes = #{record.notes,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update attack_cn
+    set ID = #{record.id,jdbcType=INTEGER},
+      Name = #{record.name,jdbcType=VARCHAR},
+      Abstraction = #{record.abstraction,jdbcType=VARCHAR},
+      Status = #{record.status,jdbcType=VARCHAR},
+      "Alternate Terms" = #{record.alternateTerms,jdbcType=VARCHAR},
+      "Likelihood Of Attack" = #{record.likelihoodOfAttack,jdbcType=VARCHAR},
+      "Typical Severity" = #{record.typicalSeverity,jdbcType=VARCHAR},
+      "Related Attack Patterns" = #{record.relatedAttackPatterns,jdbcType=VARCHAR},
+      "Related Weaknesses" = #{record.relatedWeaknesses,jdbcType=VARCHAR},
+      Description = #{record.description,jdbcType=LONGVARCHAR},
+      "Execution Flow" = #{record.executionFlow,jdbcType=LONGVARCHAR},
+      Prerequisites = #{record.prerequisites,jdbcType=LONGVARCHAR},
+      "Skills Required" = #{record.skillsRequired,jdbcType=LONGVARCHAR},
+      "Resources Required" = #{record.resourcesRequired,jdbcType=LONGVARCHAR},
+      Indicators = #{record.indicators,jdbcType=LONGVARCHAR},
+      Consequences = #{record.consequences,jdbcType=LONGVARCHAR},
+      Mitigations = #{record.mitigations,jdbcType=LONGVARCHAR},
+      "Example Instances" = #{record.exampleInstances,jdbcType=LONGVARCHAR},
+      "Taxonomy Mappings" = #{record.taxonomyMappings,jdbcType=LONGVARCHAR},
+      Notes = #{record.notes,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update attack_cn
+    set ID = #{record.id,jdbcType=INTEGER},
+      Name = #{record.name,jdbcType=VARCHAR},
+      Abstraction = #{record.abstraction,jdbcType=VARCHAR},
+      Status = #{record.status,jdbcType=VARCHAR},
+      "Alternate Terms" = #{record.alternateTerms,jdbcType=VARCHAR},
+      "Likelihood Of Attack" = #{record.likelihoodOfAttack,jdbcType=VARCHAR},
+      "Typical Severity" = #{record.typicalSeverity,jdbcType=VARCHAR},
+      "Related Attack Patterns" = #{record.relatedAttackPatterns,jdbcType=VARCHAR},
+      "Related Weaknesses" = #{record.relatedWeaknesses,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

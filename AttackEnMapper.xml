@@ -9,7 +9,7 @@
     <result column="Alternate Terms" property="alternateTerms" jdbcType="VARCHAR" />
     <result column="Likelihood Of Attack" property="likelihoodOfAttack" jdbcType="VARCHAR" />
     <result column="Typical Severity" property="typicalSeverity" jdbcType="VARdCHAR" />
-    <result column="Related Attack Patterns" property="relatedAttackPatterns" jdbcType="VARCHAR" />
+    <result column="Related Attack Patterns" property="relatedAttackPatterns" jdbcType="VARssCHAR" />
     <result column="Related Weaknesses" property="relatedWeaknesses" jdbcType="VARCHAR" />
   </resultMap>
   <resultMap id="ResultMapWithBLOBs" type="com.example.demo.model.AttackEnWithBLOBs" extends="BaseResultMap" >

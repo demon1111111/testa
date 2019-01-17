@@ -37,7 +37,7 @@
             <property name="enableSubPackages" value="true"/>
         </javaClientGenerator>
 
-        <table tableName="attack_en" domainObjectName="AttackEn"></table>
+        <table tableName="attack_en" domainObjectName="AttackddEn"></table>
         <table tableName="attack_cn" domainObjectName="AttackCn"></table>
 
     </context>

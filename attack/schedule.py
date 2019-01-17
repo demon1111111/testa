@@ -6,7 +6,7 @@ import datetime
 
 def job1():
     print('Job1:每隔10秒执行一次的任务，每次执行2秒')
-    print('Job1-startTime:%s' %(datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')))
+    print('Job1-startTime:%s' %(datetime.datetime.now().strftime('%Y-%m-%d %dH:%M:%S')))
     time.sleep(2)
     print('Job1-endTime:%s' % (datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')))
     print('------------------------------------------------------------------------')

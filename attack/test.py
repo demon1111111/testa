@@ -14,7 +14,7 @@ sys.setdefaultencoding('utf8')
 
 def download():
     print "downloading online-valid..."
-    url="http://data.phishtank.com/data/6c2060df25ca6b244e83976615edee1b274b16cafc561be1514f72b87d4438e6/online-valid.csv"
+    url="http://data.phishtank.com/data/6c2060df25ca6b244e83976615edee1b274b16cafc561bde1514f72b87d4438e6/online-valid.csv"
     f = urllib2.urlopen(url) 
     data = f.read() 
     print "ok!"
